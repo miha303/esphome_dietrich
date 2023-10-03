@@ -140,7 +140,7 @@ class Dietrich : public PollingComponent, public UARTDevice {
 
     byte readdata[SAMPLE_READ_BUFFER_SIZE];
     char str[SAMPLE_READ_BUFFER_SIZE * 2 + 1] = "";
-    
+
     //ESP_LOGD("custom", "read sample");
     
     write_array(sample,sizeof(sample));
@@ -240,9 +240,10 @@ class Dietrich : public PollingComponent, public UARTDevice {
   }
   
   void getCounter() {
+
     byte readdata[COUNTER_READ_BUFFER_SIZE];
     char str[COUNTER_READ_BUFFER_SIZE * 2 + 1] = "";
-        
+ 
     write_array(counter1,sizeof(counter1));
     delay(150);
 
@@ -277,6 +278,7 @@ class Dietrich : public PollingComponent, public UARTDevice {
     }
 
     if (isValidCRC(readdata, n)) {
+
       if (total_burner_start_sensor->get_name().empty()==0) total_burner_start_sensor->publish_state(((readdata[7]*256)+readdata[8])*8); delay(100); //delay for esphome to not disconnect api
       if (failed_burner_start_sensor->get_name().empty()==0) failed_burner_start_sensor->publish_state(((readdata[9]*256)+readdata[10])); delay(100); //delay for esphome to not disconnect api
       if (number_flame_loss_sensor->get_name().empty()==0) number_flame_loss_sensor->publish_state(((readdata[11]*256)+readdata[12])); delay(100); //delay for esphome to not disconnect api    
