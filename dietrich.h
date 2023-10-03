@@ -114,7 +114,7 @@ class Dietrich : public PollingComponent, public UARTDevice {
 
   void getSample() {
     byte readdata[80];
-    char str[80] = "";
+    char str[161] = "";
     
     //ESP_LOGD("custom", "read sample");
     
@@ -216,7 +216,7 @@ class Dietrich : public PollingComponent, public UARTDevice {
   
   void getCounter() {
     byte readdata[28];
-    char str[28] = "";
+    char str[57] = "";
         
     write_array(counter1,sizeof(counter1));
     delay(150);
